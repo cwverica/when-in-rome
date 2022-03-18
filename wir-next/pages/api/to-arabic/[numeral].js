@@ -1,3 +1,5 @@
+import validator from "../../../helpers/validator";
+
 const translateValues = {
     'I': 1,
     'V': 5,
@@ -17,11 +19,14 @@ const translateValues = {
 const numeralOrder = ["I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"];
 
 
-function toArabicConverter(numberString) {
+export default function toArabicHandler({ query: { numeral } }, res) {
+    const capitalizedNumeral = numeral.toUpperCase()
+    const validated = validator(capitalizedNumeral);
 
+    if (!validated.isValid) return res.status(400).json({ errors: validated.errors });
 
     let sum = 0;
-    let numArr = numberString.split("");
+    let numArr = capitalizedNumeral.split("");
 
     for (let i = 0; i < numArr.length; i++) {
 
@@ -37,27 +42,6 @@ function toArabicConverter(numberString) {
         }
     }
 
-    return sum;
+    return res.status(200).json({ arabic: sum.toString() });
 }
 
-function toRomanConverter(numberString) {
-
-    let number = parseInt(numberString);
-    let romanArray = [];
-
-    // iterate through numeralOrder reversed, checking for divisibility,
-
-    for (let i = numeralOrder.length - 1; i >= 0; i--) {
-        let symbol = numeralOrder[i];
-        let occurences = Math.floor(number / translateValues[symbol]);
-        if (occurences > 0) {
-            for (let i = 0; i < occurences; i++) {
-                romanArray.push(symbol);
-            }
-            number -= translateValues[symbol] * occurences;
-        }
-    }
-
-    return romanArray.join("");
-
-}
