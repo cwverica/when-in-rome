@@ -1,5 +1,6 @@
 
-function ConversionArea({ toRoman,
+
+export default function ConversionArea({ toRoman,
     input,
     output,
     handleChange }) {
@@ -24,4 +25,3 @@ function ConversionArea({ toRoman,
     )
 }
 
-export default ConversionArea;

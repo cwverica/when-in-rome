@@ -1,8 +1,9 @@
 import React from 'react';
+import Image from 'next/image';
 
-import { default as swap } from './swap.svg';
+import { default as swap } from '../../assets/swap.svg';
 
-function NavBar({ toRoman, setToRoman }) {
+export default function NavBar({ toRoman, setToRoman }) {
 
     function switchConversionDirection(e) {
         e.preventDefault();
@@ -16,9 +17,10 @@ function NavBar({ toRoman, setToRoman }) {
                 {toRoman ? "Arabic" : "Roman"} Numerals
             </div>
             <span className="img-holder">
+
                 <img
                     className="swap-img"
-                    src={swap}
+                    src="../../assets/swap.svg"
                     alt="swap positions arrows"
                     onClick={switchConversionDirection} />
             </span>
@@ -30,5 +32,3 @@ function NavBar({ toRoman, setToRoman }) {
     )
 
 }
-
-export default NavBar;

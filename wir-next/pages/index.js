@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NavBar from '../components/navBar/NavBar';
 import ConversionArea from '../components/conversionArea/ConversionArea';
+import Error from '../components/error/Error';
 import validator from '../helpers/validator';
 import styles from '../styles/Home.module.css';
 
@@ -19,6 +20,7 @@ export default function App() {
 
     useEffect(async function getConversion() {
         const val = input;
+        setErrors([]);
         if (val) {
             if (!toRoman) {
                 const validated = validator(val);
@@ -46,18 +48,32 @@ export default function App() {
         } else setOutput("");
     }, [input]);
 
+    // flex direction column -> conversion area + errormap
+    // conversion area flex direction row 
     return (
-        <div className={styles.main}>
+        <div className="nav-bar">
             <NavBar
                 toRoman={toRoman}
                 setToRoman={setToRoman} />
-            <div className="conversion-area">
-                <ConversionArea
-                    toRoman={toRoman}
-                    input={input}
-                    output={output}
-                    handleChange={handleChange}
-                    errors={errors} />
+            <div className="main-display">
+                <div className="helper-text">
+                    Click the arrows above to switch conversion direction.
+                </div>
+                <div className="conversion-area-outer">
+                    <ConversionArea
+                        toRoman={toRoman}
+                        input={input}
+                        output={output}
+                        handleChange={handleChange}
+                        errors={errors} />
+                </div>
+                <div className="error-area">
+                    {errors.length > 0 &&
+                        <ul>
+                            {errors.map(err => <Error err={err} />)}
+                        </ul>
+                    }
+                </div>
             </div>
         </div>
     );
