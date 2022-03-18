@@ -28,7 +28,7 @@ then see the [README](./wir-next/README.md) file in the `wir-next` folder.
  You could also make the operations api-endpoints, if you wanted to. But since these are simple operations, you're not saving much processing/time to have the back-end perform them.
 
 2. #### Testing   
- I would create unit tests for every component, api-endpoint, and method. I would use intergration tests to handle the DOM in it's entirety. You could use E2E tests for this, but imagining it scaling, the original MVP and future versions would be so different it might not be an effective use of time.
+ I would create unit tests for every component, api-endpoint, and method. I would use intergration tests to handle the DOM in it's entirety. You could set-up E2E tests for testing userflows, but in it's current state, I wouldn't. If you imagine it scaling: compare the original MVP and future versions - they would be so different it would not be an effective use of time.
 
 3. #### Logging   
  Perfomance logs for the "server" might be useful, but I would just have error logs output to a file. Maybe a new file for each day could be created. I believe Vercel itself has multiple logging capabilites.
